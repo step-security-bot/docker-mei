@@ -29,6 +29,4 @@ jobs:
       - name: Build docker image
         run: docker build -t docker-mei-guidelines-image .
 
-      # Runs a set of commands using the runners shell
-      - name: Message after build
-        run: echo Well done :-)
+      # Add multiplatform build
