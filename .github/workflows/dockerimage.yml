@@ -27,6 +27,12 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build docker image
-        run: docker build -t docker-mei-guidelines-image .
+        run: docker build -t docker-mei-guidelines-container-image .
+      
+      - run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u riedde --password-stdin
+    #- docker run --privileged --rm tonistiigi/binfmt --install all
+    #- docker buildx create --name mybuilder --use
+    #- docker buildx build --build-arg CI_JOB_TOKEN=${CI_JOB_TOKEN} --platform linux/arm64,linux/amd64 --push -t ${IMAGE_TAG_BASE} -f Dockerfile.baseImage .
+      - run: docker push ghcr.io/riedde/docker-mei-guidelines-container-image:latest
 
       # Add multiplatform build
