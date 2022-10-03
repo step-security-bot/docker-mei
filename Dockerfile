@@ -47,6 +47,7 @@ ENV TZ=Europe/Berlin
 
 ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb /tmp/
 
+RUN sudo apt-get install libc6
 RUN apt-get install -y --no-install-recommends gdebi fonts-stix libc6
 RUN    gdebi --non-interactive /tmp/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb
 RUN    apt-get autoremove -y
