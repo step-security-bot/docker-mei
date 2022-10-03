@@ -16,7 +16,8 @@ USER root
 RUN apt-get update && apt-get install -y \
     openjdk-8-jre-headless \
     unzip \
-    git
+    git \
+    apt-utils
 
 # setup ant
 #ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
@@ -40,13 +41,12 @@ ENV PATH=${PATH}:${ANT_HOME}/bin
 
 
 ENV PRINCE_VERSION=14.3-1
-ENV PRINCE_BUILD=22.04
+ENV PRINCE_BUILD=20.04
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Berlin
 
 ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb /tmp/
 
-RUN apt-get install -y apt-utils
 RUN apt-get -y install libc6
 RUN apt-get install -y --no-install-recommends gdebi fonts-stix
 RUN    gdebi --non-interactive /tmp/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb
