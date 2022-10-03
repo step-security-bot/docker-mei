@@ -26,8 +26,8 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-#      - name: Build docker image
-#        run: docker build -t docker-mei-guidelines-container-image .
+      - name: Build docker image
+        run: docker build -t docker-mei-guidelines-container-image .
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -37,10 +37,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-#      - name: Build and push
-#        uses: docker/build-push-action@v3
-#        with:
-#          context: .
-#          platforms: linux/amd64,linux/arm64
-#          push: true
-#          tags: user/app:latest
+          
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: user/app:latest
