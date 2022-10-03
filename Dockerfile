@@ -47,7 +47,7 @@ ENV TZ=Europe/Berlin
 
 ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb /tmp/
 
-RUN apt-get install -y --no-install-recommends gdebi fonts-stix
+RUN apt-get install -y --no-install-recommends gdebi fonts-stix libc6
 RUN    gdebi --non-interactive /tmp/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb
 RUN    apt-get autoremove -y
 RUN    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
