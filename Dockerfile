@@ -1,11 +1,10 @@
 FROM ubuntu:20.04
 
+LABEL org.opencontainers.image.authors="https://github.com/riedde"
 LABEL org.opencontainers.image.authors="https://github.com/bwbohl"
-LABEL org.opencontainers.image.source="https://github.com/bwbohl/docker-mei"
-LABEL org.opencontainers.image.revision="v0.1.2"
-LABEL maintainer="Johannes Kepper"
-LABEL maintainer="Benjamin W. Bohl"
-LABEL maintainer="Dennis Ried"
+LABEL org.opencontainers.image.authors="https://github.com/kepper"
+LABEL org.opencontainers.image.source="https://github.com/riedde/docker-mei-guidelines-image"
+LABEL org.opencontainers.image.revision="v0.0.1"
 
 ENV ANT_VERSION=1.10.12
 ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
