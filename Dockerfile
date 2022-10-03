@@ -11,32 +11,32 @@ ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
 
 USER root
 
-# install jre8, unzip
+# install apt-utils, jre8, unzip, git
 RUN apt-get update && apt-get install -y \
+    apt-utils \
     openjdk-8-jre-headless \
     unzip \
-    git \
-    apt-utils
+    git
 
 # setup ant
-#ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
-#RUN tar -xvf /tmp/ant.tar.gz -C /opt
+ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
+RUN tar -xvf /tmp/ant.tar.gz -C /opt
 ENV ANT_HOME=/opt/apache-ant-${ANT_VERSION}
 ENV PATH=${PATH}:${ANT_HOME}/bin
 
 # setup saxon
-#ADD https://sourceforge.net/projects/saxon/files/${SAXON_VERSION}.zip/download /tmp/saxon.zip
+ADD https://sourceforge.net/projects/saxon/files/${SAXON_VERSION}.zip/download /tmp/saxon.zip
 
-#RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
+RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 
 #setup xerces
-#ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/23.1.0.0/oxygen-patched-xerces-23.1.0.0.jar ${ANT_HOME}/lib
+ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/23.1.0.0/oxygen-patched-xerces-23.1.0.0.jar ${ANT_HOME}/lib
 
 # setup xmlcalabash
-#ADD https://github.com/ndw/xmlcalabash1/releases/download/1.3.2-100/xmlcalabash-1.3.2-100.zip /tmp/xmlcalabash.zip
-#RUN unzip -q /tmp/xmlcalabash.zip -d /tmp/lib/ && \
-#    cp /tmp/lib/*/lib/** ${ANT_HOME}/lib/ && \
-#    cp /tmp/lib/*/xmlcalabas*.jar ${ANT_HOME}/lib/
+ADD https://github.com/ndw/xmlcalabash1/releases/download/1.3.2-100/xmlcalabash-1.3.2-100.zip /tmp/xmlcalabash.zip
+RUN unzip -q /tmp/xmlcalabash.zip -d /tmp/lib/ && \
+    cp /tmp/lib/*/lib/** ${ANT_HOME}/lib/ && \
+    cp /tmp/lib/*/xmlcalabas*.jar ${ANT_HOME}/lib/
 
 
 ENV PRINCE_VERSION=14.3-1
