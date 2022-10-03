@@ -11,12 +11,13 @@ ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
 
 USER root
 
-# install apt-utils, jre8, unzip, git
+# install apt-utils, jre8, unzip, git, npm
 RUN apt-get update && apt-get install -y \
     apt-utils \
     openjdk-8-jre-headless \
     unzip \
-    git
+    git \
+    npm
 
 # setup ant
 ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
@@ -37,6 +38,13 @@ ADD https://github.com/ndw/xmlcalabash1/releases/download/1.3.2-100/xmlcalabash-
 RUN unzip -q /tmp/xmlcalabash.zip -d /tmp/lib/ && \
     cp /tmp/lib/*/lib/** ${ANT_HOME}/lib/ && \
     cp /tmp/lib/*/xmlcalabas*.jar ${ANT_HOME}/lib/
+
+
+ENV NODE_ENV=production
+
+#WORKDIR /app
+COPY ["package.json", "package-lock.json*", "./"]
+RUN npm install --production
 
 
 ENV PRINCE_VERSION=14.3-1
