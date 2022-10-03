@@ -6,6 +6,9 @@ LABEL org.opencontainers.image.authors="https://github.com/kepper"
 LABEL org.opencontainers.image.source="https://github.com/riedde/docker-mei-guidelines-image"
 LABEL org.opencontainers.image.revision="v0.0.1"
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Berlin
+
 ENV ANT_VERSION=1.10.12
 ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
 
@@ -49,8 +52,6 @@ RUN npm install --production
 
 ENV PRINCE_VERSION=14.3-1
 ENV PRINCE_BUILD=20.04
-ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Europe/Berlin
 
 ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb /tmp/
 
