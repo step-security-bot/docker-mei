@@ -45,7 +45,7 @@ ENV NODE_ENV=production
 
 #WORKDIR /app
 COPY ["package.json", "package-lock.json*", "./"]
-RUN npm install --production
+#RUN npm install
 
 
 ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_${ARCHITECTURE}.deb /tmp/
