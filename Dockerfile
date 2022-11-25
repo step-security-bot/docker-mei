@@ -7,10 +7,13 @@ LABEL org.opencontainers.image.source="https://github.com/riedde/docker-mei-guid
 LABEL org.opencontainers.image.revision="v0.0.1"
 
 ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Europe/Berlin
 
+ENV TZ=Europe/Berlin
 ENV ANT_VERSION=1.10.12
 ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
+ENV PRINCE_VERSION=15-1
+ENV UBUNTU_VERSION=22.04
+ENV ARCHITECTURE=arm64
 
 USER root
 
@@ -45,12 +48,10 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production
 
 
-ENV PRINCE_VERSION=14.3-1
-ENV PRINCE_BUILD=20.04
+ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_${ARCHITECTURE}.deb /tmp/
 
-ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb /tmp/
-
-    gdebi --non-interactive /tmp/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb && \
+RUN aptitude install -y gdebi
+RUN gdebi --non-interactive /tmp/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_${ARCHITECTURE}.deb && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
