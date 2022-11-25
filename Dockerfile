@@ -7,15 +7,18 @@ LABEL org.opencontainers.image.source="https://github.com/riedde/docker-mei-guid
 LABEL org.opencontainers.image.revision="v0.0.1"
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG TARGETPLATFORM
 
 ENV TZ=Europe/Berlin
 ENV ANT_VERSION=1.10.12
 ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
 ENV PRINCE_VERSION=15-1
 ENV UBUNTU_VERSION=22.04
-ENV ARCHITECTURE=arm64
+ENV ARCHITECTURE=$TARGETPLATFORM
 
 USER root
+
+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then ARCHITECTURE=amd64; elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then ARCHITECTURE=arm; elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then ARCHITECTURE=aarch64; else ARCHITECTURE=amd64; fi
 
 # install packages
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless unzip git npm libc6 aptitude libaom-dev gdebi fonts-stix

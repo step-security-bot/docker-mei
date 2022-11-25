@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build docker image
-        run: docker build -t docker-mei-guidelines-image:latest .
+        run: docker build --build-arg TARGETPLATFORM=amd64 -t docker-mei-guidelines-image:latest .
       #ghcr.io/${{ github.actor }}/
 
       - name: Log in to registry
