@@ -14,13 +14,8 @@ ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
 
 USER root
 
-# install apt-utils, jre8, unzip, git, npm
-RUN apt-get update && apt-get install -y \
-    apt-utils \
-    openjdk-8-jre-headless \
-    unzip \
-    git \
-    npm
+# install packages
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless unzip git npm libc6 aptitude libaom-dev gdebi fonts-stix
 
 # setup ant
 ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
@@ -55,8 +50,6 @@ ENV PRINCE_BUILD=20.04
 
 ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb /tmp/
 
-RUN apt-get -y install libc6
-RUN apt-get install -y --no-install-recommends gdebi fonts-stix && \
     gdebi --non-interactive /tmp/prince_${PRINCE_VERSION}_ubuntu${PRINCE_BUILD}_amd64.deb && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
