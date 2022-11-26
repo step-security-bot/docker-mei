@@ -44,9 +44,9 @@ RUN unzip -q /tmp/xmlcalabash.zip -d /tmp/lib/ && \
     cp /tmp/lib/*/lib/** ${ANT_HOME}/lib/ && \
     cp /tmp/lib/*/xmlcalabas*.jar ${ANT_HOME}/lib/
 
-#WORKDIR /app
+WORKDIR /opt/music-encoding
 COPY ["package.json", "package-lock.json*", "./"]
-#RUN npm install
+RUN npm install --production
 
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_amd64.deb --output /tmp/prince.deb; \
     elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_arm64.deb --output /tmp/prince.deb; \
