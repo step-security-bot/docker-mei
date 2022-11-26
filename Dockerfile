@@ -54,6 +54,6 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then curl -L https://www.princexml
     else curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_amd64.deb --output /tmp/prince.deb; fi
 
 RUN aptitude install -y gdebi
-RUN gdebi --non-interactive /tmp/prince.deb && \
-    apt-get autoremove -y && \
+RUN gdebi --non-interactive /tmp/prince.deb
+RUN apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
