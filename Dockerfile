@@ -47,11 +47,12 @@ RUN curl -L https://github.com/ndw/xmlcalabash1/releases/download/1.3.2-100/xmlc
 COPY ["package.json", "package-lock.json*", "./"]
 #RUN npm install
 
-
-ADD https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_${ARCHITECTURE}.deb /tmp/
+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_amd64.deb --output /tmp/prince.deb; \
+    elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_arm64.deb --output /tmp/prince.deb; \
+    elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_arm64.deb --output /tmp/prince.deb; \
+    else curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_amd64.deb --output /tmp/prince.deb; fi
 
 RUN aptitude install -y gdebi
-RUN gdebi --non-interactive /tmp/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_${ARCHITECTURE}.deb && \
+RUN gdebi --non-interactive /tmp/prince.deb && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
