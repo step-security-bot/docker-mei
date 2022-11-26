@@ -25,21 +25,22 @@ USER root
 # install packages
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless curl unzip git npm libc6 aptitude libaom-dev gdebi fonts-stix
 
+# download software
+RUN curl -L https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz --output /tmp/ant.tar.gz && \
+    curl -L https://sourceforge.net/projects/saxon/files/${SAXON_VERSION}.zip/download --output /tmp/saxon.zip && \
+    curl -L https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/23.1.0.0/oxygen-patched-xerces-23.1.0.0.jar --output ${ANT_HOME}/lib && \
+    curl -L https://github.com/ndw/xmlcalabash1/releases/download/1.3.2-100/xmlcalabash-1.3.2-100.zip --output /tmp/xmlcalabash.zip
+
 # setup ant
-ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
 RUN tar -xvf /tmp/ant.tar.gz -C /opt
 
 # setup saxon
-ADD https://sourceforge.net/projects/saxon/files/${SAXON_VERSION}.zip/download /tmp/saxon.zip
-
 RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 
-#setup xerces
-ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/23.1.0.0/oxygen-patched-xerces-23.1.0.0.jar ${ANT_HOME}/lib
+#setup xerces done with downloading#
 
 # setup xmlcalabash
-RUN curl -L https://github.com/ndw/xmlcalabash1/releases/download/1.3.2-100/xmlcalabash-1.3.2-100.zip --output /tmp/xmlcalabash.zip && \
-    unzip -q /tmp/xmlcalabash.zip -d /tmp/lib/ && \
+RUN unzip -q /tmp/xmlcalabash.zip -d /tmp/lib/ && \
     cp /tmp/lib/*/lib/** ${ANT_HOME}/lib/ && \
     cp /tmp/lib/*/xmlcalabas*.jar ${ANT_HOME}/lib/
 
