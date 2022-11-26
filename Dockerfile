@@ -23,7 +23,7 @@ ENV NODE_ENV=production
 USER root
 
 # install packages
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless unzip git npm libc6 aptitude libaom-dev gdebi fonts-stix
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless curl unzip git npm libc6 aptitude libaom-dev gdebi fonts-stix
 
 # setup ant
 ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
