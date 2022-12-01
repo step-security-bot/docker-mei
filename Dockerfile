@@ -39,17 +39,13 @@ RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 
 #setup xerces done with downloading#
 
-# setup xmlcalabash
-RUN unzip -q /tmp/xmlcalabash.zip -d /tmp/lib/ && \
-    cp /tmp/lib/*/lib/** ${ANT_HOME}/lib/ && \
-    cp /tmp/lib/*/xmlcalabas*.jar ${ANT_HOME}/lib/
-
 WORKDIR /opt/music-encoding
 COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production
 
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_amd64.deb --output /tmp/prince.deb; \
     elif [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_arm64.deb --output /tmp/prince.deb; \
+    elif [ "$TARGETPLATFORM" = "linux/arm/v8" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_arm64.deb --output /tmp/prince.deb; \
     elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_arm64.deb --output /tmp/prince.deb; \
     else curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_amd64.deb --output /tmp/prince.deb; fi
 
