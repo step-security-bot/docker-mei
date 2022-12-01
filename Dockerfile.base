@@ -12,6 +12,7 @@ ARG TARGETPLATFORM
 ENV TZ=Europe/Berlin
 ENV ANT_VERSION=1.10.12
 ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
+ENV XERCES_VERSION=23.1.0.0
 ENV PRINCE_VERSION=15-1
 ENV UBUNTU_VERSION=22.04
 ENV TARGETPLATFORM=$TARGETPLATFORM
@@ -28,7 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openj
 # download software
 ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
 ADD https://sourceforge.net/projects/saxon/files/${SAXON_VERSION}.zip/download /tmp/saxon.zip
-ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/23.1.0.0/oxygen-patched-xerces-23.1.0.0.jar ${ANT_HOME}/lib
+ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/${XERCES_VERSION}/oxygen-patched-xerces-${XERCES_VERSION}.jar ${ANT_HOME}/lib
 
 # setup ant
 RUN tar -xvf /tmp/ant.tar.gz -C /opt
