@@ -1,17 +1,24 @@
 # docker-mei
 
-A docker image for anything concerning MEI.
+Docker images for anything concerning the MEI build process.
 
-## Local build basic image
+The repository contains two Dockerfiles:
+
+- `Dockerfile.base`: creates a basic image with all necessary dependencies (Saxon, Ant, Verovio, Prince)
+- `Dockerfile`: creates an executing image that allows running different MEI build steps (incl. building schema, customizations, or guidelines)
+
+## Local build of basic image
+
 ```docker build -f Dockerfile.base -t docker-mei-base . ```
 
-## Local build executive image
+## Local build of executing image
+
 ```docker build -t docker-mei .```
 
-## Exampl usage (without local build)
+## Example usage (without local build)
 
 tbc.
 
-## Exampl usage (local build)
+## Example usage (local build)
 
 ```docker run --rm -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/music-encoding --name docker-mei docker-mei```
