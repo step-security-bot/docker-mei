@@ -45,7 +45,8 @@ RUN npm install --production
 
 RUN if [ "$TARGETPLATFORM" = "linux/arm/v7" || "$TARGETPLATFORM" = "linux/arm/v8" || "$TARGETPLATFORM" = "linux/arm64" ]; then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_arm64.deb --output /tmp/prince.deb; \
     else curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_amd64.deb --output /tmp/prince.deb; fi
-
+RUN dpkg --add-architecture arm64
+RUN apt-get update
 RUN aptitude install -y gdebi
 RUN gdebi --non-interactive /tmp/prince.deb
 RUN apt-get autoremove -y && \
