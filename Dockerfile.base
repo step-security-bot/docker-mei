@@ -7,15 +7,15 @@ LABEL org.opencontainers.image.source="https://github.com/music-encoding/docker-
 LABEL org.opencontainers.image.revision="v0.0.1"
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG TARGETPLATFORM
+ARG TARGETARCH
+ARG SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
+ARG XERCES_VERSION=23.1.0.0
+ARG PRINCE_VERSION=15.1
+ARG UBUNTU_VERSION=22.04
+ARG DEB_FILE=prince_${PRINCE_VERSION}-1_ubuntu${UBUNTU_VERSION}_${TARGETARCH}.deb
 
 ENV TZ=Europe/Berlin
 ENV ANT_VERSION=1.10.12
-ENV SAXON_VERSION=Saxon-HE/10/Java/SaxonHE10-8J
-ENV XERCES_VERSION=23.1.0.0
-ENV PRINCE_VERSION=15.1
-ENV UBUNTU_VERSION=22.04
-ENV TARGETPLATFORM=$TARGETPLATFORM
 
 ENV ANT_HOME=/opt/apache-ant-${ANT_VERSION}
 ENV PATH=${PATH}:${ANT_HOME}/bin
@@ -24,7 +24,13 @@ ENV NODE_ENV=production
 USER root
 
 # install packages
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless curl unzip git npm libc6 aptitude libaom-dev gdebi fonts-stix
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless curl unzip git npm libc6 aptitude libaom-dev gdebi fonts-stix && \
+    curl --proto '=https' --tlsv1.2 -O https://www.princexml.com/download/${DEB_FILE} && \
+#    aptitude install -y gdebi && \
+    gdebi --non-interactive ./${DEB_FILE} && \
+    apt-get purge -y curl && \
+    apt-get autoremove -y && apt-get clean && \
+    ln -sf /etc/ssl/certs/ca-certificates.crt /usr/lib/prince/etc/curl-ca-bundle.crt
 
 # download software
 ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
@@ -42,10 +48,3 @@ RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 WORKDIR /opt/music-encoding
 COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production
-
-RUN if [ "$TARGETPLATFORM" = "linux/arm/v7" || "$TARGETPLATFORM" = "linux/arm/v8" || "$TARGETPLATFORM" = "linux/arm64" ];  then curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_arm64.deb --output /tmp/prince.deb; dpkg --add-architecture arm64; apt-get update;\
-    else curl -L https://www.princexml.com/download/prince_${PRINCE_VERSION}_ubuntu${UBUNTU_VERSION}_amd64.deb --output /tmp/prince.deb; fi
-RUN aptitude install -y gdebi
-RUN gdebi --non-interactive /tmp/prince.deb
-RUN apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

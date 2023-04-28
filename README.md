@@ -9,7 +9,9 @@ The repository contains two Dockerfiles:
 
 ## Local build of basic image
 
-```docker build -f Dockerfile.base -t docker-mei-base . ```
+```bash
+  docker buildx build -f Dockerfile.base -t docker-mei-base .
+```
 
 ## Local build of executing image
 
