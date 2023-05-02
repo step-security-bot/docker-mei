@@ -46,6 +46,7 @@ RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 # setup xerces
 ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/${XERCES_VERSION}/oxygen-patched-xerces-${XERCES_VERSION}.jar ${ANT_HOME}/lib
 
+# setup node app for rendering MEI files to SVG using Verovio Toolkit
 WORKDIR /opt/music-encoding
 COPY ["index.js", "package.json", "package-lock.json*", "./"]
 RUN npm install --production
