@@ -22,7 +22,7 @@ const verovioOptions = {
    "svgViewBox": true
 }
 
-let stream = walker(['/data'])
+let stream = walker(['/opt/music-encoding/music-encoding/build/assets/images/GeneratedImages'])
 
 let processFile = (path) => {
   fs.readFile(path, 'utf-8', (err, data) => {
