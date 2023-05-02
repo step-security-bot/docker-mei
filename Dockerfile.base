@@ -35,18 +35,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openj
     apt-get autoremove -y && apt-get clean && \
     ln -sf /etc/ssl/certs/ca-certificates.crt /usr/lib/prince/etc/curl-ca-bundle.crt
 
-# download software
-ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
-ADD https://sourceforge.net/projects/saxon/files/${SAXON_VERSION}.zip/download /tmp/saxon.zip
-ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/${XERCES_VERSION}/oxygen-patched-xerces-${XERCES_VERSION}.jar ${ANT_HOME}/lib
-
 # setup ant
+ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz /tmp/ant.tar.gz
 RUN tar -xvf /tmp/ant.tar.gz -C /opt
 
 # setup saxon
+ADD https://sourceforge.net/projects/saxon/files/${SAXON_VERSION}.zip/download /tmp/saxon.zip
 RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 
-#setup xerces done with downloading#
+# setup xerces
+ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/${XERCES_VERSION}/oxygen-patched-xerces-${XERCES_VERSION}.jar ${ANT_HOME}/lib
 
 WORKDIR /opt/music-encoding
 COPY ["index.js", "package.json", "package-lock.json*", "./"]
