@@ -48,5 +48,5 @@ RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 #setup xerces done with downloading#
 
 WORKDIR /opt/music-encoding
-COPY ["package.json", "package-lock.json*", "./"]
+COPY ["index.js", "package.json", "package-lock.json*", "./"]
 RUN npm install --production
