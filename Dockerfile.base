@@ -30,9 +30,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openj
     curl -fsSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh && \
     apt install nodejs && \
-    rm ${DEB_FILE} nodesource_setup.sh  && \
-    apt-get purge -y curl && \
-    apt-get autoremove -y && apt-get clean && \
     ln -sf /etc/ssl/certs/ca-certificates.crt /usr/lib/prince/etc/curl-ca-bundle.crt
 
 # setup ant
@@ -45,6 +42,12 @@ RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 
 # setup xerces
 ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/${XERCES_VERSION}/oxygen-patched-xerces-${XERCES_VERSION}.jar ${ANT_HOME}/lib
+
+# cleanup
+RUN apt-get purge -y aptitude apt-utils gdebi curl unzip && \
+    apt-get autoremove -y && apt-get clean && \
+    rm ${DEB_FILE} nodesource_setup.sh && \
+    rm -r /tmp
 
 # setup node app for rendering MEI files to SVG using Verovio Toolkit
 WORKDIR /opt/music-encoding
