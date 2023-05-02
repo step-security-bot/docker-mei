@@ -24,10 +24,13 @@ ENV NODE_ENV=production
 USER root
 
 # install packages
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless curl unzip git npm libc6 aptitude libaom-dev gdebi fonts-stix && \
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless curl unzip git libc6 aptitude libaom-dev gdebi fonts-stix && \
     curl --proto '=https' --tlsv1.2 -O https://www.princexml.com/download/${DEB_FILE} && \
 #    aptitude install -y gdebi && \
     gdebi --non-interactive ./${DEB_FILE} && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
+    bash nodesource_setup.sh && \
+    apt install nodejs && \
     apt-get purge -y curl && \
     apt-get autoremove -y && apt-get clean && \
     ln -sf /etc/ssl/certs/ca-certificates.crt /usr/lib/prince/etc/curl-ca-bundle.crt
