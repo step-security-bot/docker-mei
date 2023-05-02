@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openj
     curl -fsSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh && \
     apt install nodejs && \
+    rm ${DEB_FILE} nodesource_setup.sh  && \
     apt-get purge -y curl && \
     apt-get autoremove -y && apt-get clean && \
     ln -sf /etc/ssl/certs/ca-certificates.crt /usr/lib/prince/etc/curl-ca-bundle.crt
