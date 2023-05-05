@@ -53,6 +53,6 @@ RUN apt-get purge -y aptitude apt-utils gdebi curl unzip && \
     rm -r /tmp
 
 # setup node app for rendering MEI files to SVG using Verovio Toolkit
-WORKDIR /opt/music-encoding
+WORKDIR /opt/docker-mei
 COPY ["index.js", "package.json", "package-lock.json*", "./"]
 RUN npm install --production
