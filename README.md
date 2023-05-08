@@ -31,7 +31,7 @@ docker run --rm -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.i
 
 ## Local build and usage
 
-Clone the repository to your machine, e.g., via the command line:
+Clone the repository to your machine, e.g., via the commandline:
 
 1. Navigate to the parent directory where you want your clone to live, e.g.:
 
@@ -57,7 +57,7 @@ Clone the repository to your machine, e.g., via the command line:
     docker buildx build -t [some-name-tag] .
     ```
 
-    N.B.: Before executing the above command, replace _[some-name-tag]_ with a name of your liking, e.g.:
+    N.B.: efore executing the above command, replace _[some-name-tag]_ with a name of your liking, e.g.:
 
     ```bash
     docker buildx build -t docker-mei:local .
@@ -70,7 +70,3 @@ Clone the repository to your machine, e.g., via the command line:
     ```
 
     N.B.: Before executing the above command, replace the _[SQUARE-BRACKETS]_ with your local variables.
-
-
-
-
