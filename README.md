@@ -23,7 +23,7 @@ docker pull ghcr.io/music-encoding/docker-mei
 docker run --rm -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
 ```
 
-For example, if you start the Dockerimage from the root folder of your music-encoding repository clone:
+For example, if you start the Docker image from the root folder of your music-encoding repository clone:
 
 ```bash
 docker run --rm -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
@@ -31,7 +31,7 @@ docker run --rm -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.i
 
 ## Local build and usage
 
-Clone the repository to your machine, e.g., via the commandline:
+Clone the repository to your machine, e.g., via the command line:
 
 1. Navigate to the parent directory where you want your clone to live, e.g.:
 
@@ -51,19 +51,19 @@ Clone the repository to your machine, e.g., via the commandline:
     cd docker-mei
     ```
 
-4. Build the Dockerimage locally:
+4. Build the Docker image locally:
 
     ```bash
     docker buildx build -t [some-name-tag] .
     ```
 
-    N.B.: efore executing the above command, replace _[some-name-tag]_ with a name of your liking, e.g.:
+    N.B.: Before executing the above command, replace _[some-name-tag]_ with a name of your liking, e.g.:
 
     ```bash
     docker buildx build -t docker-mei:local .
     ```
 
-5. Run your local Dockerimage
+5. Run your local Docker image
 
     ```bash
     docker run --rm -v [/ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE]:/opt/docker-mei/music-encoding --name docker-mei [some-name-tag]
