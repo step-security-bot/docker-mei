@@ -20,13 +20,20 @@ docker pull ghcr.io/music-encoding/docker-mei
 ## Example usage
 
 ```bash
-docker run --rm -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
+docker run --rm -it -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
 ```
 
 For example, if you start the Docker image from the root folder of your music-encoding repository clone:
 
 ```bash
-docker run --rm -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
+docker run --rm -it -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
+```
+This will open the shell in the container and you could proceed building mei assets by entering the corresponding commands, as found in the [Apache Ant™ project](https://github.com/music-encoding/music-encoding/blob/develop/build.xml) file of the [music-encoding repository ](https://github.com/music-encoding/music-encoding).
+
+Alternatively you can run the Docker container without an interactive shell and submit the command to execute directy when callin the container. For example you could submit the command to build all MEI assets, i.e., compiled ODD files for the customization, RMG schemata for the customizations, HTML and PDF of the MEI Guidelines:
+
+```bash
+docker run --rm -v $(pwd):/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei ant -noinput -buildfile music-encoding/build.xml -Ddocker=true
 ```
 
 ## Local build and usage
