@@ -34,7 +34,7 @@ docker run --rm -v $(pwd):/opt/docker-mei/music-encoding --name docker-mei ghcr.
 
 ### Running with an interactive shell
 
-If you need more fine-grained access and control, you can run the Docker container in an interactive shell with the additional `-it` flag. 
+If you need more fine-grained access and control, you can run the Docker container in an interactive shell by adding an `-it` flag.
 
 ```bash
 docker run --rm -it -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
@@ -45,9 +45,28 @@ For example, if you start the Docker image from the root folder of your music-en
 ```bash
 docker run --rm -it -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
 ```
-This will open the shell in the container and you could proceed building mei assets by entering the corresponding commands, as found in the [build.xml](https://github.com/music-encoding/music-encoding/blob/develop/build.xml) file of the [music-encoding repository ](https://github.com/music-encoding/music-encoding).
 
+This will open a shell prompt at the root folder of the container (`/opt/docker-mei`). In order to proceed building mei assets, you will need to navigate to the sub folder `music-encoding`.
 
+```bash
+cd music-encoding
+```
+
+From here you can enter the corresponding commands, as found in the [build.xml](https://github.com/music-encoding/music-encoding/blob/develop/build.xml) file of the [music-encoding repository ](https://github.com/music-encoding/music-encoding), on the command line.
+
+For example:
+
+```bash
+root@0f60c61b20d4:/opt/docker-mei/music-encoding# ant build-compiled-odd
+```
+
+Please note that for some commands it is necessary to add a `-Ddocker=true` flag to be run from an interactive shell. Therefore it is recommended to use that flag in any case, when running build commands on an interactive Docker shell:
+
+For example:
+
+```bash
+root@0f60c61b20d4:/opt/docker-mei/music-encoding# ant generate-images -Ddocker=true
+```
 
 ## Local build and usage
 
