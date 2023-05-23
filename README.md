@@ -19,6 +19,23 @@ docker pull ghcr.io/music-encoding/docker-mei
 
 ## Example usage
 
+### Running without an interactive shell
+You can run the Docker container without an interactive shell and submit the command to execute directly when calling the container. For example, you could submit the command to build all MEI assets, i.e., compiled ODD files for the customization, RNG schemata for the customizations, HTML and PDF of the MEI Guidelines:
+
+```bash
+docker run --rm -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei ant -noinput -buildfile music-encoding/build.xml -Ddocker=true
+```
+
+For example, if you start the Docker image from the root folder of your music-encoding repository clone:
+
+```bash
+docker run --rm -v $(pwd):/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei ant -noinput -buildfile music-encoding/build.xml -Ddocker=true
+```
+
+### Running with an interactive shell
+
+If you need more fine-grained access and control, you can run the Docker container in an interactive shell with the additional `-it` flag. 
+
 ```bash
 docker run --rm -it -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
 ```
@@ -30,11 +47,7 @@ docker run --rm -it -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei gh
 ```
 This will open the shell in the container and you could proceed building mei assets by entering the corresponding commands, as found in the [build.xml](https://github.com/music-encoding/music-encoding/blob/develop/build.xml) file of the [music-encoding repository ](https://github.com/music-encoding/music-encoding).
 
-Alternatively, you can run the Docker container without an interactive shell and submit the command to execute directly when calling the container. For example, you could submit the command to build all MEI assets, i.e., compiled ODD files for the customization, RNG schemata for the customizations, HTML and PDF of the MEI Guidelines:
 
-```bash
-docker run --rm -v $(pwd):/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei ant -noinput -buildfile music-encoding/build.xml -Ddocker=true
-```
 
 ## Local build and usage
 
