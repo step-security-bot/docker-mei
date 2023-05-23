@@ -28,7 +28,7 @@ For example, if you start the Docker image from the root folder of your music-en
 ```bash
 docker run --rm -it -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
 ```
-This will open the shell in the container and you could proceed building mei assets by entering the corresponding commands, as found in the [Apache Ant™ project](https://github.com/music-encoding/music-encoding/blob/develop/build.xml) file of the [music-encoding repository ](https://github.com/music-encoding/music-encoding).
+This will open the shell in the container and you could proceed building mei assets by entering the corresponding commands, as found in the [build.xml](https://github.com/music-encoding/music-encoding/blob/develop/build.xml) file of the [music-encoding repository ](https://github.com/music-encoding/music-encoding).
 
 Alternatively, you can run the Docker container without an interactive shell and submit the command to execute directly when calling the container. For example, you could submit the command to build all MEI assets, i.e., compiled ODD files for the customization, RNG schemata for the customizations, HTML and PDF of the MEI Guidelines:
 
