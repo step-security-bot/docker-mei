@@ -14,7 +14,7 @@ The image is being published on the GitHub Container Registry.
 ## Pull docker image
 
 ```bash
-docker pull ghcr.io/music-encoding/docker-mei
+docker pull ghcr.io/music-encoding/docker-mei:latest
 ```
 
 ## Example usage
@@ -43,7 +43,7 @@ docker run --rm -it -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/docker-m
 For example, if you start the Docker image from the root folder of your music-encoding repository clone:
 
 ```bash
-docker run --rm -it -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei
+docker run --rm -it -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei:latest
 ```
 
 This will open a shell prompt at the root folder of the container (`/opt/docker-mei`). In order to proceed building mei assets, you will need to navigate to the sub folder `music-encoding`.
