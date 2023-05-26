@@ -30,13 +30,14 @@ The following examples use different Docker commands. Detailed explanations of t
 | `docker buildx build` | Builds a Docker image from a Dockerfile. If not specified, the file is assumed to be in the current working directory. |
 | `-t` | Allows to specify some name and optional tag for the Docker image to be built, e.g., `docker-mei:local` | 
 
-## Pull docker image
+
+### Pulling the Docker image
 
 ```bash
 docker pull ghcr.io/music-encoding/docker-mei:latest
 ```
 
-## Example usage
+Alternatively, the image will be automatically pulled when you run a docker container via `docker run`.
 
 ### Running without an interactive shell
 You can run the Docker container without an interactive shell and submit the command to execute directly when calling the container. For example, you could submit the command to build all MEI assets, i.e., compiled ODD files for the customization, RNG schemata for the customizations, HTML and PDF of the MEI Guidelines:
