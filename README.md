@@ -49,7 +49,7 @@ docker run --rm -v /ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE:/opt/docker-mei/m
 For example, if you start the Docker image from the root folder of your music-encoding repository clone:
 
 ```bash
-docker run --rm -v $(pwd):/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei:latest ant -noinput -buildfile music-encoding/build.xml -Ddocker=true
+docker run --rm -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei ghcr.io/music-encoding/docker-mei:latest ant -noinput -buildfile music-encoding/build.xml -Ddocker=true
 ```
 
 ### Running with an interactive shell
