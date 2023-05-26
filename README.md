@@ -9,7 +9,26 @@ The image contains all the necessary dependencies:
 * **Verovio Toolkit:** to render MEI examples to SVG
 * **Prince XML:** to convert the Guidelines HTML to PDF
 
-The image is being published on the GitHub Container Registry.
+The image is being published on the GitHub Container Registry (ghcr.io).
+
+## Example usage
+
+The following examples use different Docker commands. Detailed explanations of these Docker commands can be found in the [Docker Command-line reference](https://docs.docker.com/engine/reference/run/) but here’s a concise explanation:
+
+| Command Particle | Description |
+|------------------|-------------| 
+| [Running a container] | |
+| `docker run` | Runs a docker process as an isolated container. Must specify an image to derive the container from. |
+| `--rm` | Automatically clean up the Docker container and remove the file system when the container exits. |
+| `-it` | Open an interactive shell. |
+| `-v` (or `--volume`) | mount a folder from the host as a volume in the Docker container, here the current working directory (`pwd`) gets mounted into `/opt/docker-mei/music-encoding` in the docker container |
+| `--name` | (optional) Identify the container with a local name. If not given, Docker generates a random string name. | 
+| `ghcr.io/music-encoding/docker-mei:latest` or `docker-mei:local` | The Docker image (latest version) to be used and pulled, wether from a remote registry like ghcr.io or a local build process. |
+| `ant -noinput -buildfile music-encoding/build.xml` | Execute ant with the build.xml file of the music-encoding repo. |
+| `-Ddocker=true` | A flag to indicate that ant is triggered via Docker. |
+| [Building an image] | |
+| `docker buildx build` | Builds a Docker image from a Dockerfile. If not specified, the file is assumed to be in the current working directory. |
+| `-t` | Allows to specify some name and optional tag for the Docker image to be built, e.g., `docker-mei:local` | 
 
 ## Pull docker image
 
