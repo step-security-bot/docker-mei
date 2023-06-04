@@ -37,7 +37,7 @@ The following examples use different Docker commands. Detailed explanations of t
 docker pull ghcr.io/music-encoding/docker-mei:latest
 ```
 
-Alternatively, the image will be automatically pulled when you run a docker container via `docker run`.
+Although the image will be automatically pulled when you run a docker container via `docker run`, the image will not be automatically updated to the latest version on subsequent runs. So it is recommended to run the `docker pull` command above from time to time.
 
 ### Running without an interactive shell
 You can run the Docker container without an interactive shell and submit the command to execute directly when calling the container. For example, you could submit the command to build all MEI assets, i.e., compiled ODD files for the customization, RNG schemata for the customizations, HTML and PDF of the MEI Guidelines:
