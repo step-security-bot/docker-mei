@@ -7,12 +7,12 @@ LABEL org.opencontainers.image.source="https://github.com/music-encoding/docker-
 LABEL org.opencontainers.image.revision="v0.0.1"
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG TARGETARCH
-ARG SAXON_VERSION=Saxon-HE/11/Java/SaxonHE11-4J
-ARG XERCES_VERSION=25.1.0.1
 ARG JAVA_VERSION=17
 ARG PRINCE_VERSION=15.1
+ARG SAXON_VERSION=Saxon-HE/11/Java/SaxonHE11-4J
+ARG TARGETARCH
 ARG UBUNTU_VERSION=22.04
+ARG XERCES_VERSION=25.1.0.1
 ARG DEB_FILE=prince_${PRINCE_VERSION}-1_ubuntu${UBUNTU_VERSION}_${TARGETARCH}.deb
 
 ENV TZ=Europe/Berlin
