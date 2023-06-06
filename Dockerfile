@@ -10,6 +10,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG TARGETARCH
 ARG SAXON_VERSION=Saxon-HE/11/Java/SaxonHE11-4J
 ARG XERCES_VERSION=25.1.0.1
+ARG JAVA_VERSION=17
 ARG PRINCE_VERSION=15.1
 ARG UBUNTU_VERSION=22.04
 ARG DEB_FILE=prince_${PRINCE_VERSION}-1_ubuntu${UBUNTU_VERSION}_${TARGETARCH}.deb
@@ -24,7 +25,7 @@ ENV NODE_ENV=production
 USER root
 
 # install packages
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-8-jre-headless curl unzip git libc6 aptitude libaom-dev gdebi fonts-stix && \
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils openjdk-${JAVA_VERSION}-jre-headless curl unzip git libc6 aptitude libaom-dev gdebi fonts-stix && \
     # install prince
     curl --proto '=https' --tlsv1.2 -O https://www.princexml.com/download/${DEB_FILE} && \
     gdebi --non-interactive ./${DEB_FILE} && \
