@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.revision="v0.0.1"
 ARG DEBIAN_FRONTEND=noninteractive
 ARG JAVA_VERSION=17
 ARG PRINCE_VERSION=15.1
-ARG SAXON_VERSION=Saxon-HE/11/Java/SaxonHE11-4J
+ARG SAXON_VERSION=SaxonHE11-5
 ARG TARGETARCH
 ARG UBUNTU_VERSION=22.04
 ARG XERCES_VERSION=25.1.0.1
@@ -41,7 +41,7 @@ ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.
 RUN tar -xvf /tmp/ant.tar.gz -C /opt
 
 # setup saxon
-ADD https://sourceforge.net/projects/saxon/files/${SAXON_VERSION}.zip/download /tmp/saxon.zip
+ADD https://github.com/Saxonica/Saxon-HE/releases/download/${SAXON_VERSION}/${SAXON_VERSION}J.zip /tmp/saxon.zip
 RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 
 # setup xerces
