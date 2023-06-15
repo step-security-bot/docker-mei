@@ -54,7 +54,7 @@ RUN unzip /tmp/saxon.zip -d ${ANT_HOME}/lib
 ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/${XERCES_VERSION}/oxygen-patched-xerces-${XERCES_VERSION}.jar ${ANT_HOME}/lib
 
 # cleanup
-RUN apt-get purge -y aptitude apt-utils gdebi curl unzip && \
+RUN apt-get purge -y aptitude apt-utils gdebi curl unzip wget apt-transport-https && \
     apt-get autoremove -y && apt-get clean && \
     rm ${DEB_FILE} nodesource_setup.sh && \
     rm -r /tmp
