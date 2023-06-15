@@ -128,4 +128,7 @@ Clone the repository to your machine, e.g., via the command line:
     docker run --rm -v [/ABSOLUTE/PATH/TO/YOUR/MUSIC_ENCODING/CLONE]:/opt/docker-mei/music-encoding --name docker-mei [some-name-tag]
     ```
 
-    N.B.: Before executing the above command, replace the _[SQUARE-BRACKETS]_ with your local variables.
+    N.B.: Before executing the above command, replace the _[SQUARE-BRACKETS]_ with your local variables. For example, if you start your local Docker image from the root folder of your music-encoding repository clone:
+    ```bash
+    docker run --rm -v `pwd`:/opt/docker-mei/music-encoding --name docker-mei docker-mei:local
+    ```
