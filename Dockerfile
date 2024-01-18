@@ -32,8 +32,7 @@ ADD https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.
 COPY ["index.js", "package.json", "package-lock.json*", "/opt/docker-mei/"]
 
 # Configure the Eclipse Adoptium apt repository
-RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get update && apt-get full-upgrade -y && \
+RUN apt-get update && apt-get full-upgrade -y && \
     apt-get install -y --no-install-recommends wget apt-transport-https curl ca-certificates && \
     mkdir -p /etc/apt/keyrings && \
     wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc && \
