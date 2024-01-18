@@ -57,7 +57,7 @@ ADD https://www.oxygenxml.com/maven/com/oxygenxml/oxygen-patched-xerces/${XERCES
 RUN apt-get purge -y aptitude apt-utils gdebi curl unzip wget apt-transport-https && \
     apt-get autoremove -y && apt-get clean && \
     rm ${DEB_FILE} nodesource_setup.sh && \
-    rm -r /tmp
+    rm -rf /tmp/*
 
 # setup node app for rendering MEI files to SVG using Verovio Toolkit
 WORKDIR /opt/docker-mei
