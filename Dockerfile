@@ -40,25 +40,25 @@ RUN apt-get update && apt-get full-upgrade -y && \
     # install nodejs
     curl -fsSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh && \
-	  # install prince
+    # install prince
     curl --proto '=https' --tlsv1.2 -LO https://www.princexml.com/download/${DEB_FILE} && \
     apt-get install -y --no-install-recommends apt-utils python3-pip temurin-${JAVA_VERSION}-jdk nodejs unzip git libc6 aptitude libaom-dev fonts-stix ./${DEB_FILE} && \
     # link ca-certificates
     ln -sf /etc/ssl/certs/ca-certificates.crt /usr/lib/prince/etc/curl-ca-bundle.crt && \
-	  # setup ant
-	  tar -xvf /tmp/apache-ant-${ANT_VERSION}-bin.tar.gz -C /opt && \
-	  # setup saxon
-	  unzip /tmp/${SAXON_VERSION}J.zip -d ${ANT_HOME}/lib && \
-	  # setup xerces
-	  cp /tmp/oxygen-patched-xerces-${XERCES_VERSION}.jar ${ANT_HOME}/lib && \
+    # setup ant
+    tar -xvf /tmp/apache-ant-${ANT_VERSION}-bin.tar.gz -C /opt && \
+    # setup saxon
+    unzip /tmp/${SAXON_VERSION}J.zip -d ${ANT_HOME}/lib && \
+    # setup xerces
+    cp /tmp/oxygen-patched-xerces-${XERCES_VERSION}.jar ${ANT_HOME}/lib && \
     # cleanup
     apt-get purge -y aptitude apt-utils && \
     apt-get autoremove -y && apt-get clean && \
-	  apt-get clean && \
+    apt-get clean && \
     rm ${DEB_FILE} nodesource_setup.sh && \
   	cd /opt/docker-mei && \
   	# setup node app for rendering MEI files to SVG using Verovio Toolkit
-	  npm install --omit=dev	&& \
+    npm install --omit=dev	&& \
     # clean temporary folders
     rm -rfv /tmp/* /root/.npm*
 
