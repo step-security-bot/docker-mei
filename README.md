@@ -80,7 +80,8 @@ For example:
 root@0f60c61b20d4:/opt/docker-mei/music-encoding# ant build-compiled-odd
 ```
 
-Please note that for some commands it is necessary to add a `-Ddocker=true` flag to be run from an interactive shell. Therefore it is recommended to use that flag in any case, when running build commands on an interactive Docker shell:
+> [!IMPORTANT] 
+> Please note that for some commands it is necessary to add a `-Ddocker=true` flag to be run from an interactive shell. Therefore it is recommended to use that flag in any case, when running build commands on an interactive Docker shell:
 
 For example:
 
